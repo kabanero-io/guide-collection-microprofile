@@ -1,5 +1,5 @@
 ---
-permalink: /guides/collection-eclipse-mp-appsody/
+permalink: /guides/collection-microprofile/
 ---
 :page-layout: guide
 :projectid: collection-eclipse-mp-appsody
