@@ -1,3 +1,18 @@
+---
+permalink: /guides/collection-microprofile/
+---
+:page-layout: guide
+:projectid: collection-eclipse-mp-appsody
+:page-duration: 40 minutes
+:page-releasedate: 2019-09-19
+:page-description: Explore how to use the Eclipse MicroProfile Collection and Appsody CLI to create, run, update, deploy, and deliver cloud native microservices.
+:guide-author: Kabanero
+:page-tags: ['Java', 'MicroProfile', 'Collection']
+:page-guide-category: collections
+:page-essential: true
+:page-essential-order: 1
+= Developing cloud native microservices with the Eclipse MicroProfile Collection and Appsody CLI
+
 // Copyright 2019 IBM Corporation and others.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +27,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-:page-layout: guide
-:projectid: collection-eclipse-mp-appsody
-:page-duration: 40 minutes
-:page-releasedate: 2019-09-13
-:page-description: Explore how to use the Eclipse MicroProfile Collection and Appsody CLI to create, run, update, deploy, and deliver cloud native microservices.
-:guide-author: Kabanero
-:page-tags: ['Java', 'MicroProfile', 'Collection']
-:page-guide-category: collections
-:page-essential: true
-:page-essential-order: 1
-:page-permalink: /guides/collection-eclipse-mp-appsody/
-=  Developing cloud native microservices with the Eclipse MicroProfile Collection and Appsody CLI
 
 [.hidden]
 NOTE: This repository contains the guide documentation source. To view the guide in published form, view it on the https://kabanero.io/guides/{projectid}.html[website].
@@ -179,7 +182,7 @@ image::/img/guide/microprofile-project-layout.png[link="/img/guide/microprofile-
 It contains the following artifacts:
 
 * `StarterApplication.java`, a JAX-RS Application class
-* `server.xml`, a Liberty server configuration file
+* `server.xml`, an Open Liberty server configuration file
 * `index.html`, a static HTML file
 * `pom.xml`, a project build file
 
@@ -195,7 +198,7 @@ Run the following command to start the Appsody development environment:
 appsody run
 ----
 
-The Appsody CLI launches a local docker image that contains an Open Liberty server that hosts the microservice. After some time, you see a message similar to the following example:
+The Appsody CLI launches a local Docker image that contains an Open Liberty server that hosts the microservice. After some time, you see a message similar to the following example:
 [source, role='no_copy']
 ----
 [Container] [INFO] [AUDIT   ] CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 20.235 seconds.
@@ -289,7 +292,7 @@ The pod that is related to your deployed application is similar to the following
 simple-microprofile-77d6868765-xkcpk   1/1     Running   0         31s
 ----
 
-After the `simple-microprofile` pod starts, go to the URL that was returned after you ran the `appsody deploy` command, and you see the Appsody microservice splash screen. To see the response from your application, point your browser to `<URL_STRING>/starter/resource`, where <URL_STRING> is the URL that was returned. For example, the http://localhost:30262 URL was returned in the previous example. Go to the http://localhost:30262/starter/resource URL to see the deployed application response.
+After the `simple-microprofile` pod starts, go to the URL that was returned after you ran the `appsody deploy` command, and you see the Appsody microservice splash screen. To see the response from your application, point your browser to `<URL_STRING>/starter/resource`, where `<URL_STRING>` is the URL that was returned. For example, the http://localhost:30262 URL was returned in the previous example. Go to the http://localhost:30262/starter/resource URL to see the deployed application response.
 
 Use the following command to stop the deployed application:
 [role="command"]
@@ -339,7 +342,7 @@ After the application deploys, you see a message similar to the following exampl
 Deployed project running at "http://simple-microprofile.knative-serving.192.168.1.10.nip.io"
 ----
 
-To see the response from your application, point your browser to `<URL_STRING>/starter/resource`, where <URL_STRING> is the URL that was returned in the previous step.
+To see the response from your application, point your browser to `<URL_STRING>/starter/resource`, where `<URL_STRING>` is the URL that was returned in the previous step.
 
 // =================================================================================================
 // Delivering to pipelines
