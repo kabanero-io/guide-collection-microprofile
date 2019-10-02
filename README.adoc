@@ -52,7 +52,7 @@ Kabanero's Eclipse MicroProfile Collection provides a stack that enables the dev
 . link:https://docs.docker.com/install/[Docker] must be installed.
 . You must have access to a Kubernetes cluster. If you are using Docker for Desktop, you can enable Kubernetes from the menu by selecting Preferences -> Kubernetes -> Enable Kubernetes.
 . link:https://appsody.dev/docs/getting-started/installation[Appsody] must be installed.
-. (Optional) If you have an enterprise-specific Kabanero Collection Hub, you need the URL to your index file.
+. *Optional*: If you have a repository that contains a set of custom collections, then you need the URL where the collections' `index.yaml` file is available. Use this URL to make your custom collections available with the Appsody CLI.
 
 // =================================================================================================
 // Getting started
@@ -212,7 +212,7 @@ This message indicates that the server is started and you are ready to begin dev
 
 == Creating and updating the application
 
-Navigate to the JAX-RS application endpoint to confirm that there are no JAX-RS resources available. Go to the http://localhost:9080/starter URL. You see the following `HTTP 500` error that states that there are no provider or resource classes that are associated with the application:
+Now you can create your business logic. The first thing to do is to add a REST endpoint. Navigate to the JAX-RS application endpoint to confirm that there are no JAX-RS resources available. Go to the http://localhost:9080/starter URL. You see the following `HTTP 500` error that states that there are no provider or resource classes that are associated with the application:
 [source, role='no_copy']
 ----
 Error 500: javax.servlet.ServletException: At least one provider or resource class should be specified for application class "dev.appsody.starter.StarterApplication
