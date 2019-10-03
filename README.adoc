@@ -212,13 +212,15 @@ This message indicates that the server is started and you are ready to begin dev
 
 == Creating and updating the application
 
-Now you can create your business logic. The first thing to do is to add a REST endpoint. Navigate to the JAX-RS application endpoint to confirm that there are no JAX-RS resources available. Go to the http://localhost:9080/starter URL. You see the following `HTTP 500` error that states that there are no provider or resource classes that are associated with the application:
-[source, role='no_copy']
-----
-Error 500: javax.servlet.ServletException: At least one provider or resource class should be specified for application class "dev.appsody.starter.StarterApplication
-----
+// Now you can create your business logic. The first thing to do is to add a REST endpoint. Navigate to the JAX-RS application endpoint to confirm that there are no JAX-RS resources //available. Go to the http://localhost:9080/starter URL. You see the following `HTTP 500` error that states that there are no provider or resource classes that are associated with the application:
+// [source, role='no_copy']
+// ----
+// Error 500: javax.servlet.ServletException: At least one provider or resource class should be specified for application class "dev.appsody.starter.StarterApplication
+// ----
 
-In a new command-line window, go to the `src/main/java/dev/appsody/starter` directory that's within your project folder. Create a file named `StarterResource.java`. Open the file, populate it with the following code, and save it:
+Now you can create your business logic. Typically, you put your business logic in a JAX-RS resource. The first thing to do is to add a REST endpoint.
+
+Create a `StarterResource.java` class in the `src/main/java/dev/appsody/starter` directory. Open the file, populate it with the following code, and save it:
 [source,java]
 ----
 package dev.appsody.starter;
