@@ -11,7 +11,7 @@ permalink: /guides/collection-microprofile/
 :page-guide-category: collections
 :page-essential: true
 :page-essential-order: 1
-= Developing cloud native microservices with the Eclipse MicroProfile Collection, Appsody CLI and Kabanero
+= Developing cloud native microservices with the Kabanero Eclipse MicroProfile Collection and Appsody CLI
 
 // Copyright 2019 IBM Corporation and others.
 //
@@ -31,7 +31,7 @@ permalink: /guides/collection-microprofile/
 [.hidden]
 NOTE: This repository contains the guide documentation source. To view the guide in published form, view it on the https://kabanero.io/guides/{projectid}.html[website].
 
-Explore how to use the Eclipse MicroProfile Kabanero Collection and Appsody CLI to create, run, update, deploy, and deliver cloud native microservices.
+Explore how to use the Kabanero Eclipse MicroProfile Collection and Appsody CLI to create, run, update, deploy, and deliver cloud native microservices.
 
 // =================================================================================================
 // What you'll learn
@@ -41,7 +41,7 @@ Explore how to use the Eclipse MicroProfile Kabanero Collection and Appsody CLI 
 
 You will learn how to create and run a simple cloud native microservice. Then, you'll update the microservice that you created and deploy it to Kubernetes or Knative. This will all be done by using the Eclipse MicroProfile Kabanero Collection with the link:https://appsody.dev/docs/using-appsody/cli-commands[Appsody CLI].
 
-Kabanero's Eclipse MicroProfile Collection provides a stack that enables the development and optimization of microservices. Applications are written based on the Eclipse MicroProfile API specifications, and built and run with the link:https://openliberty.io/[Open Liberty] runtime. And deployed with the Kabanero deploymeent model into your Application Develoopment cluster.
+Kabanero's Eclipse MicroProfile Collection provides a stack that enables the development and optimization of microservices. Applications are written based on the Eclipse MicroProfile API specifications, built and run with the link:https://openliberty.io/[Open Liberty] runtime, and deployed with the Kabanero deployment model into your application development cluster.
 
 // =================================================================================================
 // Prerequisites
@@ -49,11 +49,11 @@ Kabanero's Eclipse MicroProfile Collection provides a stack that enables the dev
 
 == Prerequisites
 
-. link:https://docs.docker.com/install/[Docker] must be installed.
-. link:https://appsody.dev/docs/getting-started/installation[Appsody] must be installed.
-. *Optional*: If you have a repository that contains a set of custom collections, then you need the URL where the collections' `index.yaml` file is available. Use this URL to make your custom collections available with the Appsody CLI.
-. *Optional*: You must have access to a local Kubernetes cluster for local developmeent use if you are testing multiple microservices together. If you are using Docker for Desktop, you can enable Kubernetes from the menu by selecting Preferences -> Kubernetes -> Enable Kubernetes.
-. *Optional*: If you have a Kabanero instance that is used by your team for team based development, you must have access to this cluster provided to you by your administrator.
+* link:https://docs.docker.com/install/[Docker] must be installed.
+* link:https://appsody.dev/docs/getting-started/installation[Appsody] must be installed.
+* *Optional*: If you have a repository that contains a set of custom collections, then you need the URL where the collections' `index.yaml` file is available. Use this URL to make your custom collections available with the Appsody CLI.
+* *Optional*: If you are testing multiple microservices together, then you must have access to a local Kubernetes cluster for local development. If you are using Docker Desktop, you can enable Kubernetes from the menu by selecting Preferences -> Kubernetes -> Enable Kubernetes.
+* *Optional*: If your Kabanero instance is used by your team for team-based development, then you must have access to the application cluster that is provided by your administrator.
 
 // =================================================================================================
 // Getting started
@@ -67,7 +67,9 @@ Kabanero's Eclipse MicroProfile Collection provides a stack that enables the dev
 
 === *Configuring Appsody*
 
-Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.1.2. *Note*: Using the public Kabanero collection hub is for dimenstration only,  it is strongly recommended that you make your own private copy of the collection hub and you use it in the same way. But this demenstration does not require this.
+*Note*: The use of the public Kabanero Collection Hub is only for the purposes of this guide. It is recommended that you make a private copy of the Kabanero Collection Hub and use it in the same way. However, this demonstration does not require that you make your own copy.
+
+Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.1.2.
 
 To check the repositories that Appsody can already access, run the following command:
 [role="command"]
@@ -113,7 +115,7 @@ appsodyhub  https://github.com/appsody/stacks/releases/latest/download/incubator
 *kabanero   https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
 ----
 
-*Recommendation*: The collections in the "kabanero collection hub", will be the only repoository that the application cluster will support.  This repository will have  the collections that the solution architect has curated for your business's use.  So its best to remove the "appsodyhub" from the list of supported taks.
+*Recommendation*: The collections in the Kabanero Collection Hub are the only repositories that the application cluster supports. Because these repositories are the collections that the solution architect curated for your business's use, it's best to remove `appsodyhub` from the list of supported tasks.
 ----
 appsody repo remove appsodyhub
 
@@ -272,7 +274,7 @@ Try changing the message in the `StarterResource.java` file, saving, and refresh
 // Use `Ctrl-C` to stop the Appsody development environment.
 
 == Deploying the application
-Once you have built the application and done some form of unit test, which involves testing this container in isolation, it is desirable to test it as part of the system it will be part of. To do this you need to deploy the overall system, and then the new application that it is part of. You have some choices of how this is accomplished. You can deploy the application on a local Kubernetes running on your laptop, assuming that you have adequate CPU and Memory to run both mini-shift and the application and associated services that it uses.  Or, you can deploy the system, the changed application and associated services in a private name space on the server environment that has been set up on the development cluster.
+After you build the application and perform unit testing that involves testing the container in isolation, test the application as part of the overall system. To test the application as part of the system, deploy the system and then the new application. You can choose how you want to deploy the system and application. If you have adequate CPU and memory to run Minishift, the application, and the associated services, then you can deploy the application on a local Kubernetes that is running on your computer. You can also deploy the system, the application, and the associated services in a private namespace on the server environment that is set up on the development cluster.
 
 === Deploying to a local Kubernetes
 
