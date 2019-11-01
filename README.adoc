@@ -13,6 +13,8 @@ permalink: /guides/collection-microprofile/
 :page-essential-order: 1
 = Developing cloud native microservices with the Kabanero Eclipse MicroProfile Collection and Appsody CLI
 
+// ******Nate review******
+
 // Copyright 2019 IBM Corporation and others.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
