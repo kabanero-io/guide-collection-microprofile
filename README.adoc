@@ -70,7 +70,7 @@ Applications in this guide are written based on the Eclipse MicroProfile API spe
 
 *Note*: The use of the public Kabanero Collection Hub is only for the purposes of this guide. It is recommended that you make a private copy of the Kabanero Collection Hub and use it in the same way. However, this demonstration does not require that you make your own copy.
 
-Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.1.2.
+Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.3.0.
 
 To check the repositories that Appsody can already access, run the following command:
 [role="command"]
@@ -81,27 +81,25 @@ appsody repo list
 You see an output similar to the following example:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-*appsodyhub https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+*incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
 ----
 
 Next, run the following command to add the Kabanero index:
 [role="command"]
 ----
-appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
 ----
 
 Check the existing repositories to see that it was added:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-*appsodyhub https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-kabanero    https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+*incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+kabanero    https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
 ----
 
-In this example, the asterisk (*) shows that `appsodyhub` is the default repository. Run the following command to set the Kabanero index as the default repository:
+In this example, the asterisk (*) shows that `incubator` is the default repository. Run the following command to set the Kabanero index as the default repository:
 [role="command"]
 ----
 appsody repo set-default kabanero
@@ -110,20 +108,24 @@ appsody repo set-default kabanero
 Check the existing repositories to see that it was updated:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-appsodyhub  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-*kabanero   https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+incubator  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+*kabanero   https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
 ----
 
-*Recommendation*: In enterprise settings, it's best to remove the `appsodyhub` task when a solution architect curated the application stacks with technology choices that are in a private Collection Hub:
+*Recommendation*: In enterprise settings, when a solution architect creates application stacks with technology choices that are in a private Collection Hub, it's best to remove `incubator` from the list. These Appsody stacks are not supported by the Kabanero application cluster.
+
+Run the following command to remove the incubator repository:
+[role="command"]
 ----
-appsody repo remove appsodyhub
+appsody repo remove incubator
+----
 
-appsody repo list
-
-NAME     	URL                                                                                *kabanero	https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
-
+Check the existing repositories to see the change:
+[source, role='no_copy']
+----
+NAME     	URL
+*kabanero	https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
 ----
 
 Your Appsody CLI is now configured to use the Kabanero Collections. Next, you need to initialize your project.
@@ -258,7 +260,7 @@ After you save, the source compiles and the application updates. You see message
 [Container] [INFO] [AUDIT   ] CWWKZ0003I: The application starter-app updated in 0.988 seconds.
 ----
 
-Now if you browse to the http://localhost:9080/starter URL, you no longer see the `HTTP 500` error. The resource that you just added is available at the `starter/resource` URL path. Go to the http://localhost:9080/starter/resource URL to see the following resource response:
+The resource that you just added is available at the `starter/resource` URL path. Go to the http://localhost:9080/starter/resource URL to see the following resource response:
 [source, role='no_copy']
 ----
 StarterResource response
