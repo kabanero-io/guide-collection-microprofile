@@ -88,7 +88,7 @@ NAME        URL
 Next, run the following command to add the Kabanero index:
 [role="command"]
 ----
-appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
+appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 Check the existing repositories to see that it was added:
@@ -96,7 +96,7 @@ Check the existing repositories to see that it was added:
 ----
 NAME        URL
 *incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-kabanero    https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
+kabanero    https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 In this example, the asterisk (*) shows that `incubator` is the default repository. Run the following command to set the Kabanero index as the default repository:
@@ -110,7 +110,7 @@ Check the existing repositories to see that it was updated:
 ----
 NAME        URL
 incubator  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-*kabanero   https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
+*kabanero   https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 *Recommendation*: In enterprise settings, when a solution architect creates application stacks with technology choices that are in a private Collection Hub, it's best to remove `incubator` from the list. These Appsody stacks are not supported by the Kabanero application cluster.
@@ -125,7 +125,7 @@ Check the existing repositories to see the change:
 [source, role='no_copy']
 ----
 NAME     	URL
-*kabanero	https://github.com/kabanero-io/collections/releases/download/v0.3.0/kabanero-index.yaml
+*kabanero	https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 Your Appsody CLI is now configured to use the Kabanero Collections. Next, you need to initialize your project.
