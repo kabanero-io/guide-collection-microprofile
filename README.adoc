@@ -39,11 +39,11 @@ Explore how to use the Kabanero Eclipse MicroProfile Collection and Appsody CLI 
 
 == What you'll learn
 
-You will learn how to create and run a simple cloud native microservice. Then, you'll update the microservice that you created and deploy it to Kubernetes or Knative (optional if seeking to scale to zero). This will all be done by using the Eclipse MicroProfile Kabanero Collection with the link:https://appsody.dev/docs/using-appsody/cli-commands[Appsody CLI].
+You'll learn how to create and run a simple cloud native microservice. Then, you'll update the microservice that you created and deploy it to Kubernetes or Knative. This process will be done by using the Eclipse MicroProfile Kabanero Collection with the link:https://appsody.dev/docs/using-appsody/cli-commands[Appsody CLI]. Deployment to Knative is optional depending on whether you want to Scale to Zero.
 
-Kabanero's Eclipse MicroProfile Collection provides an application stack that enables the development and optimization of microservices. Application Stacks remove the burden of managing the full software development stack built for deploying to Kubernetes, all without being an expert on the underlying container technology or Kubernetes itself.  In enterprises, stacks are customized with their company standards and technology choices built in.  
+Kabanero's Eclipse MicroProfile Collection provides an application stack that enables the development and optimization of microservices. With application stacks, developers don't need to manage full software development stacks or be experts on underlying container technologies or Kubernetes. Application stacks are customized for specific enterprises to incorporate their company standards and technology choices.
 
-Applications in this guide are written based on the Eclipse MicroProfile API specifications, built and run with the link:https://openliberty.io/[Open Liberty] runtime, and deployed to Kubernetes through a modern DevOps toolchain triggered via actions occuring in Git.  
+Applications in this guide are written based on the Eclipse MicroProfile API specifications, built and run with the link:https://openliberty.io/[Open Liberty] runtime, and deployed to Kubernetes through a modern DevOps toolchain that is triggered in Git.
 
 // =================================================================================================
 // Prerequisites
@@ -54,7 +54,7 @@ Applications in this guide are written based on the Eclipse MicroProfile API spe
 * link:https://docs.docker.com/install/[Docker] must be installed.
 * link:https://appsody.dev/docs/getting-started/installation[Appsody] must be installed.
 * *Optional*: If you have a repository that contains a set of custom collections, then you need the URL where the collections' `index.yaml` file is available. Use this URL to make your custom collections available with the Appsody CLI.
-* *Optional*: If you are testing multiple microservices together, then you must have access to a local Kubernetes cluster for local development. If you are using Docker Desktop, you can enable Kubernetes from the menu by selecting Preferences -> Kubernetes -> Enable Kubernetes.  Other options include link:https://https://www.okd.io/minishift/[MiniShift] or Minikube.
+* *Optional*: If you are testing multiple microservices together, then you must have access to a local Kubernetes cluster for local development. If you are using Docker Desktop, you can enable Kubernetes from the menu by selecting Preferences -> Kubernetes -> Enable Kubernetes. Other options include link:https://www.okd.io/minishift/[Minishift] or link:https://kubernetes.io/docs/setup/learning-environment/minikube/[Minikube].
 
 // =================================================================================================
 // Getting started
@@ -70,7 +70,7 @@ Applications in this guide are written based on the Eclipse MicroProfile API spe
 
 *Note*: The use of the public Kabanero Collection Hub is only for the purposes of this guide. It is recommended that you make a private copy of the Kabanero Collection Hub and use it in the same way. However, this demonstration does not require that you make your own copy.
 
-Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.1.2.
+Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.3.0.
 
 To check the repositories that Appsody can already access, run the following command:
 [role="command"]
@@ -81,27 +81,25 @@ appsody repo list
 You see an output similar to the following example:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-*appsodyhub https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+*incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
 ----
 
 Next, run the following command to add the Kabanero index:
 [role="command"]
 ----
-appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 Check the existing repositories to see that it was added:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-*appsodyhub https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-kabanero    https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+*incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+kabanero    https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
-In this example, the asterisk (*) shows that `appsodyhub` is the default repository. Run the following command to set the Kabanero index as the default repository:
+In this example, the asterisk (*) shows that `incubator` is the default repository. Run the following command to set the Kabanero index as the default repository:
 [role="command"]
 ----
 appsody repo set-default kabanero
@@ -110,20 +108,24 @@ appsody repo set-default kabanero
 Check the existing repositories to see that it was updated:
 [source, role='no_copy']
 ----
-appsody repo list
 NAME        URL
-appsodyhub  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-*kabanero   https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
+incubator  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
+*kabanero   https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
-*Recommendation*: In company settings it's best to remove the `appsodyhub` where a solution architect has curated the application stacks with technology choices and policies that reside in a private Collection Hub.  
+*Recommendation*: In enterprise settings, when a solution architect creates application stacks with technology choices that are in a private Collection Hub, it's best to remove `incubator` from the list. These Appsody stacks are not supported by the Kabanero application cluster.
+
+Run the following command to remove the incubator repository:
+[role="command"]
 ----
-appsody repo remove appsodyhub
+appsody repo remove incubator
+----
 
-appsody repo list
-
-NAME     	URL                                                                                *kabanero	https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
-
+Check the existing repositories to see the change:
+[source, role='no_copy']
+----
+NAME     	URL
+*kabanero	https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.yaml
 ----
 
 Your Appsody CLI is now configured to use the Kabanero Collections. Next, you need to initialize your project.
@@ -258,7 +260,7 @@ After you save, the source compiles and the application updates. You see message
 [Container] [INFO] [AUDIT   ] CWWKZ0003I: The application starter-app updated in 0.988 seconds.
 ----
 
-Now if you browse to the http://localhost:9080/starter URL, you no longer see the `HTTP 500` error. The resource that you just added is available at the `starter/resource` URL path. Go to the http://localhost:9080/starter/resource URL to see the following resource response:
+The resource that you just added is available at the `starter/resource` URL path. Go to the http://localhost:9080/starter/resource URL to see the following resource response:
 [source, role='no_copy']
 ----
 StarterResource response
@@ -274,14 +276,25 @@ Try changing the message in the `StarterResource.java` file, saving, and refresh
 // == Stopping the Appsody development environment
 // Use `Ctrl-C` to stop the Appsody development environment.
 
+// =================================================================================================
+// Testing the application
+// =================================================================================================
+
 == Testing the application
-If you are building an application composed of microservices you will ned to test in the context of the overall system.  First test your application and perform unit testing in isolation.  To test the application as part of the system, deploy the system and then the new application. You can choose how you want to deploy the system and application. If you have adequate CPU and memory to run MiniShift, the application, and the associated services, then you can deploy the application on a local Kubernetes that is running on your computer. Other options are enabling Docker Dekstop for Kubernetes which is described in the prereq section above.
 
-You can also deploy the system, the application, and the associated services in a private namespace on a development cluster, where you will commit the microservices in git repos and deploy through a DevOps pipeline, not directly to Kubernetes. 
+If you are building an application that is composed of microservices, you need to test within the context of the overall system. First, test your application and perform unit testing in isolation. To test the application as part of the system, deploy the system and then the new application.
 
-=== Testing locally on Kubernetes
+You can choose how you want to deploy the system and application. If you have adequate CPU and memory to run MiniShift, the application, and the associated services, then you can deploy the application on a local Kubernetes that is running on your computer. Alternatively, you can enable Docker Desktop for Kubernetes, which is described in the Prerequisites section of the guide.
 
-After you finish writing your application code, the Appsody CLI makes it easy to deploy directly to a Kubernetes cluster for further local testing. Again this is valuable when wanting to test multiple microservices together or test w/ services the application will require.  
+You can also deploy the system, application, and the associated services in a private namespace on a development cluster. From this private namespace, you can commit the microservices in Git repositories and deploy them through a DevOps pipeline, not directly to Kubernetes.
+
+// =================================================================================================
+// Testing locally on Kubernetes
+// =================================================================================================
+
+=== *Testing locally on Kubernetes*
+
+After you finish writing your application code, the Appsody CLI makes it easy to deploy directly to a Kubernetes cluster for further local testing. The ability to deploy directly to a Kubernetes cluster is valuable when you want to test multiple microservices together or test with services that the application requires.
 
 Ensure that your `kubectl` command is configured with cluster details, and run the following command to deploy your application:
 [role="command"]
@@ -330,24 +343,24 @@ Deployment deleted
 ----
 
 // =================================================================================================
-// Deploying to Knative
+// Testing with Knative Serving
 // =================================================================================================
 
-=== Testing with Knative Serving
+=== *Testing with Knative Serving*
 
-You can choose to test the application deployed with Knative Serving to take advantage of 'Scale to zero'. Not all applications may be written effectively take advantage of scale to zero.  The Kabanero operator based installation will configure Knative on the Kubernetes cluster (i.e. OKD 3.11).  Due to the resource requirements to run Knative and it's prerequites it is not recommended to test locally. You should publish to Kubernetes using pipelines which is described below.  Contact your operations team for configuring the pipelines for deployment with Knative Serving enabled. 
+You can choose to test an application that is deployed with Knative Serving to take advantage of Scale to Zero. Not all applications can be written to effectively take advantage of Scale to Zero. The Kabanero operator-based installation configures Knative on the Kubernetes cluster, specifically OKD 3.11. Because of the resources that are required to run Knative and its dependencies, testing locally can be difficult. Publish to Kubernetes by using pipelines that are described later in the guide. Your operations team can configure the pipelines so that Knative Serving is enabled for deployment.
 
 // =================================================================================================
-// Publishing to pipelines
+// Publishing to Kubernetes by using pipelines
 // =================================================================================================
 
-=== Publishing to Kubernetes using pipelines
+== Publishing to Kubernetes by using pipelines
 
-After you develop and test your application in your local environment, it's time to publish it to your enterprise's pipeline to deploy into your company's Kubernetes Cluster for staging or production. This is done through Git.
+After you develop and test your application in your local environment, it's time to publish it to your enterprise's pipeline. From your enterprise's pipeline, you can deploy the application to the appropriate Kubernetes cluster for staging or production. Complete this process in Git.
 
-Deploying your application to a Kubernetes cluster with Kabanero installed should always occur through the DevOps pipeline triggered from actions in Git.  This ensures as an application developer you can focus on your application code and not containers or Kubernetes infrastructure. For your company this ensures the build of the container image and deploy to Kubernetes (or Knative for scale to zero) happens in a secure and consistent manner to company standards.
+When Kabanero is installed, deploying applications to a Kubernetes cluster always occurs through the DevOps pipeline that is triggered in Git. Using DevOps pipelines to deploy applications ensures that developers can focus on application code, not on containers or Kubernetes infrastructure. From an enterprise perspective, this deployment process ensures that both the container image build and the deployment to Kubernetes or Knative happen in a secure and consistent way that meets company standards.
 
-To deliver it to the pipeline, simply push the project to the pre-configured Git repository that has a configured webhook to trigger the enterprise build and deploy pipeline.  
+To deliver your application to the pipeline, push the project to the pre-configured Git repository that has a configured webhook. This configured webhook triggers the enterprise build and deploy pipeline.
 
 // == Nice work!
 //
