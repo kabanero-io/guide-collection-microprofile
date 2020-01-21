@@ -13,7 +13,7 @@ permalink: /guides/collection-microprofile/
 :page-essential-order: 1
 = Developing cloud native microservices with the Kabanero Eclipse MicroProfile Collection and Appsody CLI
 
-// Copyright 2019 IBM Corporation and others.
+// Copyright 2019, 2020 IBM Corporation and others.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ Applications in this guide are written based on the Eclipse MicroProfile API spe
 
 *Note*: The use of the public Kabanero Collection Hub is only for the purposes of this guide. It is recommended that you make a private copy of the Kabanero Collection Hub and use it in the same way. However, this demonstration does not require that you make your own copy.
 
-Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.4.0.
+Add your Kabanero index to the Appsody CLI. The following example uses the public index for Kabanero Version 0.5.0.
 
 To check the repositories that Appsody can already access, run the following command:
 [role="command"]
@@ -88,7 +88,7 @@ NAME        URL
 Next, run the following command to add the Kabanero index:
 [role="command"]
 ----
-appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/0.4.0/kabanero-index.yaml
+appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
 ----
 
 Check the existing repositories to see that it was added:
@@ -96,7 +96,7 @@ Check the existing repositories to see that it was added:
 ----
 NAME        URL
 *incubator https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-kabanero    https://github.com/kabanero-io/collections/releases/download/0.4.0/kabanero-index.yaml
+kabanero    https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
 ----
 
 In this example, the asterisk (*) shows that `incubator` is the default repository. Run the following command to set the Kabanero index as the default repository:
@@ -110,7 +110,7 @@ Check the existing repositories to see that it was updated:
 ----
 NAME        URL
 incubator  https://github.com/appsody/stacks/releases/latest/download/incubator-index.yaml
-*kabanero   https://github.com/kabanero-io/collections/releases/download/0.4.0/kabanero-index.yaml
+*kabanero   https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
 ----
 
 *Recommendation*: In enterprise settings, when a solution architect creates application stacks with technology choices that are in a private Collection Hub, it's best to remove `incubator` from the list. These Appsody stacks are not supported by the Kabanero application cluster.
@@ -125,7 +125,7 @@ Check the existing repositories to see the change:
 [source, role='no_copy']
 ----
 NAME     	URL
-*kabanero	https://github.com/kabanero-io/collections/releases/download/0.4.0/kabanero-index.yaml
+*kabanero	https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
 ----
 
 Your Appsody CLI is now configured to use the Kabanero Collections. Next, you need to initialize your project.
